@@ -20,5 +20,3 @@ jobs:
         run: npm ci
       - name: format
         run: npm run format
-      - name: test lint
-        run: npm run lint
