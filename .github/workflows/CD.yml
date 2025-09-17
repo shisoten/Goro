@@ -1,0 +1,20 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CD:
+    permissions:
+      contents: read
+    runs-on: Ubuntu:latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: deploy
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
