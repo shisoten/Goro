@@ -16,9 +16,6 @@ env:
 jobs:
   CD:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: $HOME/
     steps:
       - run: pwd
       # チェックアウトするアクション
