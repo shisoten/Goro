@@ -16,10 +16,9 @@ env:
 jobs:
   CD:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./app
     steps:
+      - run: pwd
+      - run: ls
       # チェックアウトするアクション
       - name: Checkout Code
         uses: actions/checkout@v2
