@@ -42,12 +42,13 @@ jobs:
         if: steps.cache-restore.outputs.cache-hit != 'true'
         run: npm ci
       # ビルド
+      - name: Build
         run: npm run build
       # awsへのアクセス情報を設定
-      - name: Deploy to S3
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: 'ap-northeast-3'
       # S3にビルドしたものをアップロード
+      - name: Deploy to S3
         run: aws s3 sync dist/ s3://samarkandria.com/
