@@ -2,8 +2,6 @@ name: CI
 
 on: 
   push:
-    branches:
-      - develop/*
 
 jobs:
   CI:
@@ -16,7 +14,19 @@ jobs:
         uses: actions/setup-node@4
         with:
           node_version: 24
-      - name: install dependency
+      # dependencyのキャッシュ
+      - name: Cache node_modules
+        id: cache-restore
+        uses: actions/cache@v4
+        with:
+          #キャッシュしたファイルとキーを格納する場所(OSによって異なる)
+          path: ~/.npm
+          #キャッシュのリストアや保存をするためのキー
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      # クリーンインストール（package-lock.jsonのみを参照してインストール）
+      - name: Dependency Install
+        if: steps.cache-restore.outputs.cache-hit != 'true'
         run: npm ci
+      # ESLint + Prettier
       - name: format
         run: npm run format

@@ -5,16 +5,49 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  # GitHubActionsOIDCRole：作成したIAMロール名
+  AWS_ROLE_ARN: arn:aws:iam::011077020616:role/oidc-test-role
+
 jobs:
   CD:
-    permissions:
-      contents: read
-    runs-on: Ubuntu:latest
-    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
     steps:
-      - uses: actions/checkout@v4
-      - name: deploy
-        uses: cloudflare/wrangler-action@v3
+      # チェックアウトするアクション
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      # 特定バージョンのnodeを設定するアクション
+      - name: Use NodeJS
+        uses: actions/setup-node@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          node-version: 24
+      # dependencyのキャッシュ
+      - name: Cache node_modules
+        id: cache-restore
+        uses: actions/cache@v4
+        with:
+          #キャッシュしたファイルとキーを格納する場所(OSによって異なる)
+          path: ~/.npm
+          #キャッシュのリストアや保存をするためのキー
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      # dependencyのインストール
+      - name: Dependency Install
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        run: npm ci
+      # ビルド
+        run: npm run build
+      # awsへのアクセス情報を設定
+      - name: Deploy to S3
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: 'ap-northeast-3'
+      # S3にビルドしたものをアップロード
+        run: aws s3 sync dist/ s3://samarkandria.com/
