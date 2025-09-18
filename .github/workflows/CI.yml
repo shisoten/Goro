@@ -8,7 +8,7 @@ jobs:
     permissions:
       contents: read
     runs-on: Ubuntu:latest
-    default:
+    defaults:
       working-directory:
         ~/
     steps:

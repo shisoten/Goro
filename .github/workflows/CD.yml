@@ -16,7 +16,7 @@ env:
 jobs:
   CD:
     runs-on: ubuntu-latest
-    default:
+    defaults:
       working-directory:
         ~/
     steps:
