@@ -9,8 +9,8 @@ jobs:
       contents: read
     runs-on: Ubuntu:latest
     defaults:
-      working-directory:
-        ~/
+      run:
+        working-directory: ~/
     steps:
       - uses: actions/checkout@v4
       - name: set up Node

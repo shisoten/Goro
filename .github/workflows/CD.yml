@@ -17,8 +17,8 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     defaults:
-      working-directory:
-        ~/
+      run:
+        working-directory: ~/
     steps:
       - run: pwd
       # チェックアウトするアクション
