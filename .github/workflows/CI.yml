@@ -8,6 +8,9 @@ jobs:
     permissions:
       contents: read
     runs-on: Ubuntu:latest
+    default:
+      working-directory:
+        ~/
     steps:
       - uses: actions/checkout@v4
       - name: set up Node
@@ -23,9 +26,9 @@ jobs:
           path: ~/.npm
           #キャッシュのリストアや保存をするためのキー
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
       # クリーンインストール（package-lock.jsonのみを参照してインストール）
       - name: Dependency Install
-        if: steps.cache-restore.outputs.cache-hit != 'true'
         run: npm ci
       # ESLint + Prettier
       - name: format

@@ -16,9 +16,11 @@ env:
 jobs:
   CD:
     runs-on: ubuntu-latest
+    default:
+      working-directory:
+        ~/
     steps:
       - run: pwd
-      - run: ls
       # チェックアウトするアクション
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -36,9 +38,9 @@ jobs:
           path: ~/.npm
           #キャッシュのリストアや保存をするためのキー
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-  
       # dependencyのインストール
       - name: Dependency Install
-        if: steps.cache-restore.outputs.cache-hit != 'true'
         run: npm ci
       # ビルド
       - name: Build
