@@ -3,24 +3,25 @@
 
 /** @type {import("prettier").Config} */
 const config = {
-  trailingComma: 'all',   // 配列やオブジェクトの末尾にカンマ
-  tabWidth: 2,            // インデント幅は2スペース
-  useTabs: false,         // スペースを使用
-  semi: true,             // ステートメント末尾にセミコロン
-  singleQuote: false,     // 文字列はダブルクォート
-  jsxSingleQuote: false,  // JSXはダブルクォート
-  arrowParens: 'always',  // アロー関数の引数は常に括弧で囲む
-  printWidth: 100,        // 1行の最大文字数
-  bracketSpacing: true,   // オブジェクトリテラルの括弧内にスペース
-  overrides: [            // ファイル種別ごとの設定
+  trailingComma: "all", // 配列やオブジェクトの末尾にカンマ
+  tabWidth: 2, // インデント幅は2スペース
+  useTabs: false, // スペースを使用
+  semi: true, // ステートメント末尾にセミコロン
+  singleQuote: false, // 文字列はダブルクォート
+  jsxSingleQuote: false, // JSXはダブルクォート
+  arrowParens: "always", // アロー関数の引数は常に括弧で囲む
+  printWidth: 100, // 1行の最大文字数
+  bracketSpacing: true, // オブジェクトリテラルの括弧内にスペース
+  overrides: [
+    // ファイル種別ごとの設定
     {
-      files: '*.html',
+      files: "*.html",
       options: {
-        printWidth: 360,  // HTMLは長めの行を許容
+        printWidth: 360, // HTMLは長めの行を許容
       },
     },
   ],
-  bracketSameLine: false // 複数行のHTMLタグの末尾の「>」を外出しする
+  bracketSameLine: false, // 複数行のHTMLタグの末尾の「>」を外出しする
 };
 
 module.exports = config;

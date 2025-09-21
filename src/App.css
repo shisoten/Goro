@@ -33,6 +33,8 @@
   }
 }
 
+@import "tailwindcss"; /* TailWindのインポート */
+
 .card {
   padding: 2em;
 }
