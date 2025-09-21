@@ -1,8 +1,8 @@
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ChatPage from "./pages/ChatPage";
 
-//　アプリコンポーネント
+// アプリコンポーネント
 function App() {
   return (
     <BrowserRouter>
