@@ -25,7 +25,7 @@ const ChatInput = ({ isLoading, setIsLoading }: ChanInputProps) => {
   };
 
   return (
-    <div className="border-t border-gray-900 bg-gray-950 p-40">
+    <>
       <TextareaAutosize
         className="
             w-full resize-none bg-gray-800 text-gray-200 rounded-lg 
@@ -67,7 +67,7 @@ const ChatInput = ({ isLoading, setIsLoading }: ChanInputProps) => {
           キャンセル
         </CustomButton>
       </div>
-    </div>
+    </>
   );
 };
 
