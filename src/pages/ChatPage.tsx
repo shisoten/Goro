@@ -18,7 +18,7 @@ const ChatPage = () => {
 
       <div
         className={`relative flex h-full min-w-0 flex-1 flex-col transition-all duration-300 ease-in-out ${
-          isSidebarOpen ? "basis-[70%] max-w-[70%]" : "basis-full max-w-full"
+          isSidebarOpen ? "basis-[80%] max-w-[80%]" : "basis-full max-w-full"
         }`}
       >
         {!isSidebarOpen && (
