@@ -21,14 +21,16 @@ const ChatPage = () => {
           isSidebarOpen ? "basis-[70%] max-w-[70%]" : "basis-full max-w-full"
         }`}
       >
-        <button
-          className={`absolute top-4 rounded-full bg-purple-600 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow transition-all duration-300 hover:bg-purple-500 ${
-            isSidebarOpen ? "left-4 translate-x-0" : "left-0 translate-x-1/2"
-          }`}
-          onClick={pushToggle}
-        >
-          {isSidebarOpen ? "<" : ">"}
-        </button>
+        {!isSidebarOpen && (
+          <button
+            className={`absolute top-4 rounded-full bg-purple-600 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow transition-all duration-300 hover:bg-purple-500 ${
+              isSidebarOpen ? "left-4 translate-x-0" : "left-0 translate-x-1/2"
+            }`}
+            onClick={pushToggle}
+          >
+            {isSidebarOpen ? "<" : ">"}
+          </button>
+        )}
         <div className="flex flex-1 flex-col px-10 pb-10">
           <h1 className="my-8 text-2xl font-semibold text-gray-200">チャット画面</h1>
           {/* 入力エリアは常に表示し、出力エリアは送信時のみ表示 */}
