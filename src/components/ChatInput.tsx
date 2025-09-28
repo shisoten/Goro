@@ -4,7 +4,7 @@ import CustomButton from "./CustomButton";
 import type { ChatInputProps } from "../props/ChatProps";
 
 // 入力欄コンポーネント
-const ChatInput = ({ isLoading, setIsLoading, isComplete, setIsComplete }: ChatInputProps) => {
+const ChatInput = ({ isLoading, setIsLoading, setIsComplete }: ChatInputProps) => {
   // 入力した文字列
   const [input, setInput] = useState("");
   // 送信ボタンの活性/非活性
@@ -17,12 +17,12 @@ const ChatInput = ({ isLoading, setIsLoading, isComplete, setIsComplete }: ChatI
 
   // 送信ボタン押下時の処理
   const handleSubmit = async () => {
-    setIsLoading((e) => (e = true));
-    setIsComplete((e) => (e = false));
-    let result = await sleep(3000);
+    setIsLoading((prev) => !prev);
+    setIsComplete((prev) => !prev);
+    const result = await sleep(3000);
     if (result) {
-      setIsLoading((e) => (e = false));
-      setIsComplete((e) => (e = true));
+      setIsLoading((prev) => !prev);
+      setIsComplete((prev) => !prev);
     }
   };
 

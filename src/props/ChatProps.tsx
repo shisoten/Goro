@@ -6,7 +6,6 @@ export type LoadingSetter = Dispatch<SetStateAction<boolean>>;
 export interface ChatInputProps {
   isLoading: boolean;
   setIsLoading: LoadingSetter;
-  isComplete: boolean;
   setIsComplete: LoadingSetter;
 }
 

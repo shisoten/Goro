@@ -17,7 +17,6 @@ const ChatPage = () => {
   const inputProps: ChatInputProps = {
     isLoading: isLoading,
     setIsLoading: setIsLoading,
-    isComplete: isComplete,
     setIsComplete: setIsComplete,
   };
 
