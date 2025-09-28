@@ -8,6 +8,7 @@ type SidebarProps = {
 // サイドバーコンポーネント
 const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   return (
+    // transition-allでアニメーション可能な全てのプロパティを対象とし、duration-300で300msをかけて動かすようにする
     <aside
       className={`relative flex h-full flex-shrink-0 flex-col overflow-hidden border-r border-gray-800 bg-gray-900/95 text-gray-200 transition-all duration-300 ease-in-out ${
         isOpen ? "basis-[20%] max-w-[20%] shadow-lg" : "basis-0 max-w-0 border-transparent"

@@ -2,18 +2,32 @@ import { useState } from "react";
 import ChatInput from "../components/ChatInput";
 import ChatOutput from "../components/ChatOutput";
 import Sidebar from "../components/Sidebar";
+import type { ChatInputProps, ChatOutputProps } from "../props/ChatProps";
 
 //　入力ページコンポーネント
 const ChatPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
 
   const pushToggle = () => {
     setIsSidebarOpen((prev) => !prev);
   };
 
+  const inputProps: ChatInputProps = {
+    isLoading: isLoading,
+    setIsLoading: setIsLoading,
+    isComplete: isComplete,
+    setIsComplete: setIsComplete,
+  };
+
+  const outputProps: ChatOutputProps = {
+    isLoading: isLoading,
+    isComplete: isComplete,
+  };
+
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-gray-950 text-gray-100">
+    <div className="flex h-screen w-screen overflow-hidden bg-white text-gray-100">
       <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen((prev) => !prev)} />
 
       <div
@@ -32,13 +46,14 @@ const ChatPage = () => {
           </button>
         )}
         <div className="flex flex-1 flex-col px-10 pb-10">
-          <h1 className="my-8 text-2xl font-semibold text-gray-200">チャット画面</h1>
+          <h1 className="my-8 text-2xl font-semibold text-black">チャット画面</h1>
           {/* 入力エリアは常に表示し、出力エリアは送信時のみ表示 */}
-          <div className="flex flex-1 items-center justify-center rounded-lg bg-gray-900/70 p-6">
-            {isLoading && <ChatOutput />}
+          <div className="flex flex-1 items-center justify-center rounded-lg bg-gray-300 p-6">
+            {<ChatOutput {...outputProps} />}
           </div>
-          <div className="mt-6 rounded-lg bg-gray-900/90 p-4">
-            <ChatInput isLoading={isLoading} setIsLoading={setIsLoading} />
+          <div className="mt-6 rounded-lg bg-gray-300 p-4">
+            {/* スプレッド構文でinputPropsを展開して渡す */}
+            <ChatInput {...inputProps} />
           </div>
         </div>
       </div>

@@ -1,34 +1,41 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import CustomButton from "./CustomButton";
-
-interface ChanInputProps {
-  isLoading: boolean;
-  setIsLoading: Function;
-}
+import type { ChatInputProps } from "../props/ChatProps";
 
 // 入力欄コンポーネント
-const ChatInput = ({ isLoading, setIsLoading }: ChanInputProps) => {
+const ChatInput = ({ isLoading, setIsLoading, isComplete, setIsComplete }: ChatInputProps) => {
   // 入力した文字列
   const [input, setInput] = useState("");
   // 送信ボタンの活性/非活性
   const isDisabled = !input;
 
+  // 待機メソッド(テスト)
+  const sleep = (time: number): Promise<boolean> => {
+    return new Promise((resolve) => setTimeout(() => resolve(true), time));
+  };
+
   // 送信ボタン押下時の処理
-  const handleSubmit = () => {
-    !isLoading && setIsLoading(true);
+  const handleSubmit = async () => {
+    setIsLoading((e) => (e = true));
+    setIsComplete((e) => (e = false));
+    let result = await sleep(3000);
+    if (result) {
+      setIsLoading((e) => (e = false));
+      setIsComplete((e) => (e = true));
+    }
   };
 
   // キャンセルボタン押下時の処理
   const handleCancel = () => {
-    isLoading && setIsLoading(false);
+    setIsLoading(false);
   };
 
   return (
     <>
       <TextareaAutosize
         className="
-            w-full resize-none bg-gray-800 text-gray-200 rounded-lg 
+            w-full resize-none bg-gray-600 text-gray-200 rounded-lg 
             px-4 py-3 pr-16 
             focus:outline-none focus:ring-1 focus:ring-purple-500
             placeholder-gray-400
