@@ -35,6 +35,8 @@
 
 @import "tailwindcss"; /* TailWindのインポート */
 
+@config "../tailwind.config.js"; /* tailwind.config.jsをTailwindの設定ファイルとして指定 */
+
 .card {
   padding: 2em;
 }

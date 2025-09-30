@@ -4,31 +4,29 @@ import CustomButton from "./CustomButton";
 import type { ChatInputProps } from "../props/ChatProps";
 
 // 入力欄コンポーネント
-const ChatInput = ({ isLoading, setIsLoading, setIsComplete }: ChatInputProps) => {
+const ChatInput = ({ isLoading, setIsLoading, onSubmit }: ChatInputProps) => {
   // 入力した文字列
   const [input, setInput] = useState("");
   // 送信ボタンの活性/非活性
-  const isDisabled = !input;
-
-  // 待機メソッド(テスト)
-  const sleep = (time: number): Promise<boolean> => {
-    return new Promise((resolve) => setTimeout(() => resolve(true), time));
-  };
+  const isDisabled = !input || isLoading;
 
   // 送信ボタン押下時の処理
   const handleSubmit = async () => {
-    setIsLoading((prev) => !prev);
-    setIsComplete((prev) => !prev);
-    const result = await sleep(3000);
-    if (result) {
-      setIsLoading((prev) => !prev);
-      setIsComplete((prev) => !prev);
+    if (isLoading || !input) return;
+    setIsLoading(true);
+    try {
+      await onSubmit(input);
+      setInput("");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // キャンセルボタン押下時の処理
   const handleCancel = () => {
-    setIsLoading(false);
+    if (isLoading) {
+      setIsLoading(false);
+    }
   };
 
   return (
