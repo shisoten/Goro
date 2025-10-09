@@ -50,7 +50,7 @@ const ChatInput = ({ isLoading, setIsLoading, onSubmit }: ChatInputProps) => {
             //　入力値が空の場合
             !input
               ? "bg-gray-700 text-gray-500 !cursor-not-allowed !hover:bg-sky-300"
-              : "bg-purple-600 hover:bg-purple-500 text-white cursor-pointer"
+              : "bg-purple-600 hover:bg-purple-500 text-black cursor-pointer"
           }`}
           disabled={isDisabled}
           onClick={handleSubmit}
